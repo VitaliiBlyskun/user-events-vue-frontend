@@ -40,20 +40,21 @@ export const getUserById = async (id) => {
   }
 };
 
-export const deleteUserEvent = async (userId, eventId) => {
+
+export const addUserEvent = async (userId, event) => {
   try {
-    const { data } = await axios.delete(`api/users/${userId}/events/${eventId}`);
-    return data.data.result.events;
+    const { data } = await axios.post(`/api/users/${userId}/events`, event);
+    return data.data.events;
   } catch (error) {
-    console.log(error);
+        console.log(`Error adding event to user: ${error.message}`);
   }
 };
 
 
-export const addUserEvent = async (credentials) => {
+export const deleteUserEvent = async (userId, eventId) => {
   try {
-    const { data } = await axios.post("api/events", credentials);
-    return data.data.result.event;
+    const { data } = await axios.delete(`api/users/${userId}/events/${eventId}`);
+    return data.data.user.events;
   } catch (error) {
     console.log(error);
   }

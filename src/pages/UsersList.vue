@@ -159,8 +159,18 @@ export default {
   },
   methods: {
     async createUser(user) {
-      const newUser = await addUser(user);
+      if (
+        !user.userName ||
+        !user.firstName ||
+        !user.lastName ||
+        !user.email ||
+        !user.phone
+      ) {
+        alert("Fill in all fields");
+        return;
+      }
 
+      const newUser = await addUser(user);
       this.users.push(newUser);
       this.modalVisible = false;
     },
@@ -184,7 +194,7 @@ export default {
   },
   computed: {
     sortedUsers() {
-        if (!Array.isArray(this.users)) {
+      if (!Array.isArray(this.users)) {
         console.error("this.users is not an array!");
         return [];
       }

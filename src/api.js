@@ -11,8 +11,17 @@ export const getUserList = async () => {
   }
 };
 
-export const addUser = async (credentials) => {
+export const addUser = async (credentials, users) => {
   try {
+    const isDuplicateName = users.find(
+      (item) =>
+        item.userName === credentials.userName ||
+        item.email === credentials.email ||
+        item.phone === credentials.phone
+    );
+    if (isDuplicateName) {
+      return null;
+    }
     const { data } = await axios.post("api/users", credentials);
     return data.data.result;
   } catch (error) {
@@ -40,20 +49,20 @@ export const getUserById = async (id) => {
   }
 };
 
-
 export const addUserEvent = async (userId, event) => {
   try {
     const { data } = await axios.post(`/api/users/${userId}/events`, event);
     return data.data.events;
   } catch (error) {
-        console.log(`Error adding event to user: ${error.message}`);
+    console.log(`Error adding event to user: ${error.message}`);
   }
 };
 
-
 export const deleteUserEvent = async (userId, eventId) => {
   try {
-    const { data } = await axios.delete(`api/users/${userId}/events/${eventId}`);
+    const { data } = await axios.delete(
+      `api/users/${userId}/events/${eventId}`
+    );
     return data.data.user.events;
   } catch (error) {
     console.log(error);

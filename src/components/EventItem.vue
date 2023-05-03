@@ -1,6 +1,5 @@
 <template>
     <div class="event">
-        <!-- <ul class="title-container" @click='$router.push(`/${event._id}`)'> -->
         <ul class="title-container">
             <li><strong>title: </strong>{{ event.title }}</li>
             <li><strong>description: </strong>{{ event.description }}</li>

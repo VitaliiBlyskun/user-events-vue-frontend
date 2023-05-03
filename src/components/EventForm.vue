@@ -3,8 +3,8 @@
     <form @submit.prevent>
         <my-input v-model.trim()="event.title" type="text" placeholder="title" />
         <my-input v-model.trim()="event.description" type="text" placeholder="description" />
-        <my-input v-model.trim()="event.startDate" type="text" placeholder="startDate" />
-        <my-input v-model.trim()="event.endDate" type="text" placeholder=" endDate" />
+        <my-input v-model.trim()="event.startDate" type="text" placeholder="startDate - 'DD-MM-YYYY'" />
+        <my-input v-model.trim()="event.endDate" type="text" placeholder="endDate - 'DD-MM-YYYY'" />
         <my-button @click="createEvent" style="align-self: flex-end">save</my-button>
     </form>
 </template>

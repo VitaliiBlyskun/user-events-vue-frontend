@@ -1,15 +1,15 @@
 <template>
   <div v-if="users.length > 0">
-      <div class="container">
-        <transition-group name="user-list">
+    <div class="container">
+      <transition-group name="user-list">
         <user-item
           v-for="user in users"
           :user="user"
           :events="user.events"
           @remove="$emit('remove', user)"
         />
-        </transition-group>
-      </div>
+      </transition-group>
+    </div>
   </div>
   <h2 v-else style="color: red">User list is empty</h2>
 </template>
@@ -57,6 +57,6 @@ export default {
 }
 
 .user-list-move {
-    transition: transform 0.8s ease;
+  transition: transform 0.8s ease;
 }
 </style>

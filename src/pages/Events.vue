@@ -84,7 +84,6 @@ export default {
       });
 
       if (UniqueEvent !== -1) {
-        // якщо івент з такими ж полями уже є в списку
         alert("You can’t create event for this time");
       } else {
         const newEvent = await addUserEvent(this.$route.params.id, {
@@ -99,10 +98,8 @@ export default {
     },
 
     async removeEvent(event) {
-      // const deletedEvents = await deleteUserEvent(this.$route.params.id, event._id)
-      // this.events = this.events.filter((item) => item._id !== deletedEvents._id);
-      const index = this.events.findIndex((item) => item._id === event._id);
-      this.events.splice(index, 1);
+      const deletedEvents = await deleteUserEvent(this.$route.params.id, event._id)
+      this.events = this.events.filter((item) => item._id !== event._id);
     },
 
     showModal() {

@@ -7,7 +7,7 @@
       <li><strong>email: </strong>{{ user.email }}</li>
       <li><strong>phone: </strong>{{ user.phone }}</li>
       <li><strong>eventsCount: </strong>{{ user.eventsCount }}</li>
-      <li><strong>nextDate: </strong>{{ getNextEventDate(user.events) }}</li>
+      <li><strong>nextDate: </strong>Unknown</li>
     </ul>
     <div>
       <my-button @click='$emit("remove", user)'>
@@ -21,21 +21,7 @@
 export default {
   props: {
     user: Object,
-    events: Array,
     required: true,
-  },
-    methods: {
-        getNextEventDate(events) {
-      if (events && events.length > 0) {
-        const sortedEvents = events
-          .filter((event) => event.userId === this.user._id)
-          .sort((first, second) => new Date(first.startDate) - new Date(second.startDate));
-          console.log(sortedEvents)
-        return sortedEvents[0].startDate;
-      } else {
-        return "unknown";
-      }
-    },
   },
 };
 </script>

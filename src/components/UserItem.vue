@@ -7,7 +7,7 @@
       <li><strong>email: </strong>{{ user.email }}</li>
       <li><strong>phone: </strong>{{ user.phone }}</li>
       <li><strong>eventsCount: </strong>{{ user.eventsCount }}</li>
-      <li><strong>nextDate: </strong>Unknown</li>
+      <li><strong>nextDate: </strong>{{ user.startDate || 'No events' }}</li>
     </ul>
     <div>
       <my-button @click='$emit("remove", user)'>
@@ -18,12 +18,24 @@
 
 <script>
 
+import { showUserEventNextDate } from "@/api";
+
 export default {
   props: {
     user: Object,
     required: true,
   },
-};
+  mounted() {
+    this.getUserInfo(this.user._id)
+  },
+  methods: {
+    async getUserInfo(id) {
+      const startDate = await showUserEventNextDate(id);
+      console.log(startDate);
+      this.user.startDate = startDate;
+    },
+  }
+}
 </script>
 
 <style scoped>
@@ -40,5 +52,4 @@ export default {
 .title-container {
   cursor: pointer;
 }
-
 </style>

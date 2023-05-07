@@ -68,3 +68,12 @@ export const deleteUserEvent = async (userId, eventId) => {
     console.log(error);
   }
 };
+
+export const showUserEventNextDate = async (id) => {
+  try {
+    const { data } = await axios.get(`api/users/${id}/events`);
+    return data.data.user.events[0].startDate.slice(0, 10);
+  } catch (error) {
+    console.log(error);
+  }
+};
